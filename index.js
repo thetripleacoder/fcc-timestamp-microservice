@@ -28,7 +28,7 @@ app.get('/api/:date', function (req, res) {
   let isUnixInput = /^\d*$/.test(dateInput);
   console.log(isUnixInput);
   let newDate = isUnixInput ? new Date(Number(dateInput)) : new Date(dateInput);
-  let unixTime = isUnixInput ? dateInput : newDate.valueOf();
+  let unixTime = isUnixInput ? Number(dateInput) : newDate.valueOf();
   let utcTime = newDate.toUTCString();
   if (newDate) {
     res.send({ unix: unixTime, utc: utcTime });
