@@ -30,7 +30,7 @@ app.get('/api/:date', function (req, res) {
   let newDate = isUnixInput ? new Date(Number(dateInput)) : new Date(dateInput);
   let unixTime = isUnixInput ? Number(dateInput) : newDate.valueOf();
   let utcTime = newDate.toUTCString();
-  if (newDate && newDate !== 'Invalid Date') {
+  if (!isNaN(newDate) && newDate !== 'Invalid Date') {
     res.send({ unix: unixTime, utc: utcTime });
   } else {
     res.send({ error: 'Invalid Date' });
