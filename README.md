@@ -10,45 +10,18 @@ You can access the live version of this microservice here: [Timestamp Microservi
 
 ## User Stories
 
-1. The API endpoint is `GET /api/timestamp/:date_string`.
-2. A date string is considered valid if it can be successfully parsed by `new Date(date_string)` in JavaScript.
-3. The Unix timestamp must be an integer (not a string) specifying milliseconds.
-4. In our tests, we use date strings compliant with ISO-8601 (e.g., "2016-11-20") to ensure UTC timestamps.
-5. If the date string is empty, it should be equivalent to triggering `new Date()`, i.e., the service uses the current timestamp.
-6. If the date string is valid, the API returns a JSON object with the structure:
-
-   ```json
-   {
-       "unix": <date.getTime()>,
-       "utc": "<date.toUTCString()>"
-   }
-   ```
-
-   For example:
-
-   - Input: `/api/timestamp/2015-12-25`
-     Output: `{"unix": 1451001600000, "utc": "Fri, 25 Dec 2015 00:00:00 GMT"}`
-   - Input: `/api/timestamp/1451001600000`
-     Output: `{"unix": 1451001600000, "utc": "Fri, 25 Dec 2015 00:00:00 GMT"}`
-
-7. If the date string is invalid, the API returns a JSON object with the structure:
-   ```json
-   {
-     "error": "Invalid Date"
-   }
-   ```
+1. You should provide your own project, not the example URL..
+2. A request to `/api/:date?` with a valid date should return a JSON object with a `unix` key that is a Unix timestamp of the input date in milliseconds (as type Number).
+3. A request to `/api/:date?` with a valid date should return a JSON object with a `utc` key that is a string of the input date in the format: `Thu, 01 Jan 1970 00:00:00 GMT`.
+4. A request to `/api/1451001600000` should return `{ unix: 1451001600000, utc: "Fri, 25 Dec 2015 00:00:00 GMT" }`.
+5. Your project can handle dates that can be successfully parsed by `new Date(date_string)`
+6. If the input date string is invalid, the API returns an object having the structure `{ error : "Invalid Date" }`
+7. An empty date parameter should return the current time in a JSON object with a `unix` key
+8. An empty date parameter should return the current time in a JSON object with a `utc` key
 
 ## Getting Started
 
 1. Clone this repository.
 2. Install dependencies using `npm install`.
 3. Run the server using `npm start`.
-4. Access the API at `http://localhost:3000/api/timestamp/:date_string`.
-
-## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+4. On the HTML, click any of the links under Example Usage to get results.
